@@ -1,5 +1,5 @@
-import { Level } from "./level"
-import { Logger, SlogHandler, type SlogAttr } from "./logger"
+import { type Level } from "./level"
+import { Logger, type SlogHandler, type SlogAttr } from "./logger"
 
 export type { SlogHandler }
 

@@ -1,4 +1,4 @@
-import { Level, LevelName } from "./level"
+import { type Level, LevelName } from "./level"
 import { TimestampKey, MessageKey, LevelKey, CallerKey, PrefixKey } from "./logger"
 import { formatTime } from "./time"
 

@@ -1,6 +1,6 @@
-import { Style } from "caramel"
-import { Level, LevelName } from "./level"
-import { Styles } from "./styles"
+import { Style } from "@yum-tty/caramel"
+import { type Level, LevelName } from "./level"
+import type { Styles } from "./styles"
 import { separator, indentSeparator } from "./logger"
 import { escapeStringForOutput, needsQuoting, sprintf } from "./logger"
 import { formatTime } from "./time"
@@ -100,7 +100,7 @@ function writeIndent(styles: Styles, str: string, indent: string, newline: boole
   const result: string[] = []
 
   for (let j = 0; j < lines.length; j++) {
-    const line = lines[j]
+    const line = lines[j]!
     if (line !== "") {
       const escaped = escapeStringForOutput(line, false)
       let val: string

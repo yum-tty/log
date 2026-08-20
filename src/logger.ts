@@ -1,5 +1,5 @@
 import {
-  Level,
+  type Level,
   DebugLevel,
   InfoLevel,
   WarnLevel,
@@ -9,11 +9,11 @@ import {
   LevelName,
 } from "./level"
 import {
-  Styles,
+  type Styles,
   DefaultStyles,
   cloneStyles,
 } from "./styles"
-import { ThemeConfig, applyTheme, getPreset } from "./themes"
+import { type ThemeConfig, applyTheme, getPreset } from "./themes"
 import { textFormat } from "./text"
 import { jsonFormat } from "./json"
 import { logfmtFormat } from "./logfmt"
@@ -116,23 +116,23 @@ export function sprintf(format: string, args: any[]): string {
       let widthStr = ""
       let precStr = ""
       let pos = i + 1
-      if (pos < format.length && format[pos] === "+") { plusFlag = true; pos++ }
-      if (pos < format.length && format[pos] === "#") { hashFlag = true; pos++ }
-      while (pos < format.length && format[pos] >= "0" && format[pos] <= "9") {
-        widthStr += format[pos]; pos++
+      if (pos < format.length && format[pos]! === "+") { plusFlag = true; pos++ }
+      if (pos < format.length && format[pos]! === "#") { hashFlag = true; pos++ }
+      while (pos < format.length && format[pos]! >= "0" && format[pos]! <= "9") {
+        widthStr += format[pos]!; pos++
       }
-      if (pos < format.length && format[pos] === ".") {
+      if (pos < format.length && format[pos]! === ".") {
         pos++
-        while (pos < format.length && format[pos] >= "0" && format[pos] <= "9") {
-          precStr += format[pos]; pos++
+        while (pos < format.length && format[pos]! >= "0" && format[pos]! <= "9") {
+          precStr += format[pos]!; pos++
         }
       }
-      const verb = pos < format.length ? format[pos] : "%"
+      const verb = pos < format.length ? format[pos]! : "%"
       i = pos
       const val = args[argIdx++]
       parts.push(formatVerb(verb, val, plusFlag, hashFlag, widthStr, precStr))
     } else {
-      parts.push(format[i])
+      parts.push(format[i]!)
     }
   }
   return parts.join("")
@@ -235,7 +235,7 @@ export function escapeStringForOutput(str: string, escapeQuotes: boolean): strin
     if (escapeQuotes && r === 0x22) {
       parts.push('\\"')
     } else if (isPrintable(r)) {
-      parts.push(str[i])
+      parts.push(str[i]!)
     } else {
       switch (r) {
         case 0x07: parts.push("\\a"); break
@@ -406,7 +406,7 @@ export class Logger {
     let callerLine = lines[skip] ?? ""
     while (this.helpers.size > 0) {
       const match = callerLine.match(/at\s+(.+?)(?:\s|\()/)
-      if (match && this.helpers.has(match[1])) {
+      if (match && this.helpers.has(match[1]!)) {
         skip++
         callerLine = lines[skip] ?? ""
       } else {
@@ -415,8 +415,8 @@ export class Logger {
     }
     const callerMatch = callerLine.match(/at\s+(?:.*?\s+\()?(.+?):(\d+):(\d+)\)?/)
     if (callerMatch) {
-      const file = callerMatch[1]
-      const line = parseInt(callerMatch[2], 10)
+      const file = callerMatch[1]!
+      const line = parseInt(callerMatch[2]!, 10)
       const cacheKey = `${this.callerOffset}:${callerLine}`
       let cached = callerCache.get(cacheKey)
       if (cached === undefined) {
@@ -441,7 +441,7 @@ export class Logger {
       const callerLine = lines[2] ?? ""
       const match = callerLine.match(/at\s+(.+?)(?:\s|\()/)
       if (match) {
-        this.helpers.add(match[1])
+        this.helpers.add(match[1]!)
       }
     })
   }

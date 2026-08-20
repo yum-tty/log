@@ -1,4 +1,4 @@
-import { Style } from "caramel"
+import { Style } from "@yum-tty/caramel"
 import type { Styles } from "./styles"
 import { DefaultStyles } from "./styles"
 import { DebugLevel, InfoLevel, WarnLevel, ErrorLevel, FatalLevel } from "./level"
@@ -99,7 +99,7 @@ export function applyTheme(config: ThemeConfig): Styles {
       if (entry && s.Levels[entry.level]) {
         const label = cfg.label ?? entry.label
         s.Levels[entry.level] = applyStyleConfig(
-          s.Levels[entry.level].setString(label),
+          s.Levels[entry.level]!.setString(label),
           cfg,
         )
       }

@@ -1,5 +1,5 @@
-import { Style } from "caramel"
-import { Level, DebugLevel, InfoLevel, WarnLevel, ErrorLevel, FatalLevel } from "./level"
+import { Style } from "@yum-tty/caramel"
+import { type Level, DebugLevel, InfoLevel, WarnLevel, ErrorLevel, FatalLevel } from "./level"
 
 export interface Styles {
   Timestamp: Style
